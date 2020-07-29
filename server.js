@@ -9,6 +9,7 @@ const expressjwt = require('express-jwt')
 const cors = require('cors')
 const port = process.env.PORT || 5000;
 require("dotenv").config()
+const mongouri = process.env.MONGODB_URI
 
 const secret = process.env.SECRET || "unicorntomatofastcloudy"
 
@@ -29,7 +30,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 mongoose.connect(
-    port, // all collections will go into one database entry
+    mongouri, // all collections will go into one database entry
     {
         useNewUrlParser: true, 
         useUnifiedTopology: true, 

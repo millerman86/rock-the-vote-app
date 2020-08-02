@@ -78,7 +78,7 @@ export default function UserProvider(props) {
   // Get an individual user's issues
   function getUserIssues() {
     if (!localStorage.getItem('token')) return
-    userAxios.get('/api/issue/user')
+    userAxios.get('/api/issue')
       .then(res => {
         console.log('here is init', res.data);
         setUserState(prevState => ({

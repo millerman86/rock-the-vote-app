@@ -94,6 +94,7 @@ export default function UserProvider(props) {
 
   useEffect(() => {
     getUserIssues()
+    console.log(getUserIssues());
   }, [])
 
   return (

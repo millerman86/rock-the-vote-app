@@ -124,6 +124,8 @@ export default function Public() {
         issues, 
     } = useContext(UserContext)
 
+    console.log(issues, 'issues');
+
     const history = useHistory()
 
     function redirect(extension) {

@@ -9,7 +9,7 @@ const expressjwt = require('express-jwt')
 const cors = require('cors')
 const port = process.env.PORT || 5000;
 require("dotenv").config()
-const mongouri = process.env.MONGODB_URI
+const mongouri = process.env.MONGODB_URI || 'mongodb://localhost:27017/rock-the-vote-app'
 
 const secret = process.env.SECRET || "unicorntomatofastcloudy"
 

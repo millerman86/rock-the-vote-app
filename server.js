@@ -18,7 +18,6 @@ const path = require("path")
 // ... other app.use middleware 
 app.use(express.static(path.join(__dirname, "client", "build")))
 
-
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))

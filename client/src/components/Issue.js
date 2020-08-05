@@ -113,8 +113,6 @@ export default function Issue(props) {
     
     const { issue, description, _id, commentCount, voteCount, imgUrl, link, type } = props
 
-    console.log('here are your props', props);
-
     let [voteCountState, setVoteCountState] = useState(voteCount)
 
     function upVoteIssue(id) {
@@ -146,7 +144,7 @@ export default function Issue(props) {
                     }
                 }} />
             </div>
-            {type === 'post' ? (<div className="content">
+            {type === 'post' ? (<div className="content">ddd
                 <div className="issue-text">
                     {parse(issue)}
                 </div>
@@ -164,7 +162,7 @@ export default function Issue(props) {
                             let issueId = _id
                             history.push(`/comment/${issueId}`)
                             }}>
-                        {commentCount > 1 ? commentCount + " comments" : "0 comments"} 
+                        {commentCount > 0 ? commentCount + " comments" : "0 comments"} 
                     </span>
                 </div>
             </div>) : null}
@@ -183,7 +181,7 @@ export default function Issue(props) {
                             let issueId = _id
                             history.push(`/comment/${issueId}`)
                             }}>
-                        {commentCount > 1 ? commentCount + " comments" : "0 comments"} 
+                        {commentCount > 0 ? commentCount + " comments" : "0 comments"} 
                     </span>
                 </div>
             </div>) : null}
@@ -205,7 +203,7 @@ export default function Issue(props) {
                             let issueId = _id
                             history.push(`/comment/${issueId}`)
                             }}>
-                        {commentCount > 1 ? commentCount + " comments" : "0 comments"} 
+                        {commentCount > 0 ? commentCount + " comments" : "0 comments"} 
                     </span>
                 </div>
             </div>) : null}

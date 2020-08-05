@@ -77,7 +77,7 @@ export default function IssueAndComments(props) {
     
     const history = useHistory()
 
-    const { issue, description, imgUrl, _id, commentCount, } = props
+    const { issue, description, imgUrl, _id, commentCount } = props
     return (
         <StyledIssue>
             <div className="voting-column">

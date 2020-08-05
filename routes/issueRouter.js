@@ -15,26 +15,20 @@ issueRouter.get('/', (req, res, next) => {
 
         let promiseArray = []
         issues.forEach((issue, i) => {
+            console.log(issue._id, 'id');
             let promise = new Promise((resolve, reject) => {
                 Comment.find({'issueId': issue._id}, (err, commentCount) => {
                     if (err) {
                         reject(err)
                     }
+                    console.log('here is comment count', commentCount);
                     resolve(commentCount)
                    
                 }).countDocuments()
             })
-
-            let createdArray = []
-            for (let i = 0; i < issues.length; i++) {
-                createdArray.push(i)
-            }
-
-            createdArray.forEach(() => {
-                promiseArray.push(promise)
-            })
+            promiseArray.push(promise)
         })
-        
+
         Promise.all(promiseArray)
             .then((values) => {
                 issues.forEach((issue, i) => {
@@ -68,14 +62,7 @@ issueRouter.get('/user', (req, res, next) => {
                 }).countDocuments()
             })
 
-            let createdArray = []
-            for (let i = 0; i < issues.length; i++) {
-                createdArray.push(i)
-            }
-
-            createdArray.forEach(() => {
-                promiseArray.push(promise)
-            })
+            promiseArray.push(promise)
         })
 
         Promise.all(promiseArray)

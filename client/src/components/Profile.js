@@ -1,4 +1,4 @@
-import React, { useContext, useState, } from 'react'
+import React, { useContext, useState, useEffect, } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import { UserContext } from '../context/UserProvider'
 import { FaMicrophone, FaFileImage, FaLink } from 'react-icons/fa'
@@ -122,6 +122,7 @@ export default function Public() {
 
     const {
         issues, 
+        getUserIssues
     } = useContext(UserContext)
 
     console.log(issues, 'issues');
@@ -132,10 +133,13 @@ export default function Public() {
         history.push(`/submit/${extension}`)
     }
 
-
     const sortedIssues = issues.sort((a, b) => {
         return b.voteCount - a.voteCount
     })
+
+    useEffect(() => {
+        getUserIssues()
+    }, [])
 
     return (
         <IssuesLayout>

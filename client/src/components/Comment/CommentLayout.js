@@ -36,6 +36,7 @@ const IssuesLayout = styled.div`
 
     .comment-box {
         margin: 20px;
+        padding-bottom: 20px;
     }
 
     .image-container {
@@ -64,7 +65,7 @@ const IssuesLayout = styled.div`
 
     .first-column {
         margin: 20px 0;
-        padding: 0 20px;
+        padding: 20px 20px;
         background: white;
     }
 
@@ -101,6 +102,10 @@ const IssuesLayout = styled.div`
 
     .description-text {
         padding: 0 10px;
+    }
+
+    .link-url {
+        color: blue;
     }
 
     @media only screen and (min-width: 768px) {
@@ -184,7 +189,8 @@ export default function CommentLayout() {
     const [issue, setIssue] = useState({})
     const [comment, setComment] = useState('')
     const [comments, setComments] = useState([])
-        
+
+
     const { issueId } = useParams()
 
     function removeBorder() {
@@ -252,9 +258,11 @@ export default function CommentLayout() {
             })
     }, [])
 
-    const description = issue.description ? issue.description : ""
-    const issueString = issue.issue ? issue.issue : ""
-    const type = issue.type ? issue.type : ""
+    const description = issue.description ? issue.description : ''
+    const issueString = issue.issue ? issue.issue : ''
+    const type = issue.type ? issue.type : ''
+    const link = issue.link ? issue.link : ''
+
 
     const renderedComments = comments.map((comment, i) => {
         return (<div key={i} className="comment-container">
@@ -291,13 +299,26 @@ export default function CommentLayout() {
                         </div>
                     </div>) : null}
 
-                    {type === 'link' ? (<div>
 
+
+                    {type === 'link' ? (<div className="content">
+                        <div className="issue-text">
+                            {parse(issueString)}
+                        </div>
+                        <div className="link-url-container">
+                            <span className="link-url">{link}</span>
+                        </div>
                     </div>) : null} 
+
+
+
 
                     {type === 'poll' ? (<div>
 
                     </div>) : null}
+
+
+
 
                     <div className="comment-box">
                         <Styled>
@@ -316,9 +337,11 @@ export default function CommentLayout() {
                         <div className="button-box">
                             <button onClick={makeComment}>Comment</button>
                         </div>
-
-                        
                     </div>
+
+
+
+
                     {renderedComments}
                 </div>
                 <div className="second-column">

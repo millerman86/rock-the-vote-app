@@ -24,7 +24,6 @@ function App() {
 
         <Route
           exact path="/" 
-          component={Auth} 
           render={() => (token ? <Redirect to="/profile" /> : <Auth />)}
         />
         <Route 

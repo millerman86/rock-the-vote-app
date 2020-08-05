@@ -73,7 +73,7 @@ body {
 
 const StyledForm = styled.form`
     background: white;
-
+    border-radius: 5px;
     padding-bottom: 10px;
 
     input, 
@@ -98,6 +98,7 @@ const StyledForm = styled.form`
     }
 
     .type-of-submission {
+        overflow: hidden;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         padding-bottom: 10px;
@@ -148,6 +149,14 @@ const StyledForm = styled.form`
         height: 2px;
         background-color: blue;
         position: absolute;
+    }
+
+    .link-type {
+        border-radius: 0 5px 0 0;
+    }
+
+    .post-type {
+        border-radius: 5px 0 0 0;
     }
 
     .type-container {
@@ -317,7 +326,7 @@ export default function IssueForm(props) {
     return (
         <StyledForm onSubmit={handleSubmit}>
             <div className="type-of-submission">
-                <div className={`type ${type === 'post' ? "selected" : ""}`} onClick={() => window.location.replace('/submit/post')}>
+                <div className={`type ${type === 'post' ? "selected" : ""} post-type`} onClick={() => window.location.replace('/submit/post')}>
                     <div>Post</div>
                 </div>
                 <div className={`type ${type === 'image' ? "selected" : ""}`} onClick={() => window.location.replace('/submit/image')}>
@@ -326,7 +335,7 @@ export default function IssueForm(props) {
                         <span>Image</span>
                     </div>  
                 </div>
-                <div className={`type ${type === 'link' ? "selected" : ""}`} onClick={() => window.location.replace('/submit/link')}>
+                <div className={`type ${type === 'link' ? "selected" : ""} link-type`} onClick={() => window.location.replace('/submit/link')}>
                     <div className="type-container">
                         <FaLink />
                         <span>Link</span>

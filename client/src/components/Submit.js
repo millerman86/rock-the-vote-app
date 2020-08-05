@@ -11,8 +11,16 @@ const IssuesLayout = styled.div`
     background: #DAE0E6;
     min-height: 100vh;
 
+    .rules-for-posting-container {
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
     .rules-for-posting {
-        margin-top: 40px;
+        background: lightgray;
+        padding: 5px;
+        margin: 0;
     }
 
     .rules-for-posting ol {
@@ -62,11 +70,10 @@ export default function Submit() {
                     <h3>Add an Issue</h3>
                     <hr />
                     <IssueForm addIssue={addIssue} /> 
-                    <h3>Your Political Issues</h3>
                 </div>
                 <div className="second-column">
-                    <div className="rules-for-posting">
-                    <p>Rules Posting to Rock The Vote</p>
+                    <div className="rules-for-posting-container">
+                    <p className="rules-for-posting">Rules Posting to Rock The Vote</p>
                         <ol>
                         <li>No Profanity</li>
                             <li>Be nice</li>

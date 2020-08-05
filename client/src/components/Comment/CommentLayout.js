@@ -67,6 +67,7 @@ const IssuesLayout = styled.div`
         margin: 20px 0;
         padding: 20px 20px;
         background: white;
+        border-radius: 5px;
     }
 
     .second-column {
@@ -108,6 +109,16 @@ const IssuesLayout = styled.div`
         color: blue;
     }
 
+    .rules-for-posting-container {
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .rules-for-posting {
+        background: lightgray;
+        padding: 5px;
+    }
+    
     @media only screen and (min-width: 768px) {
         .grid-parent {
             width: 100%;
@@ -290,7 +301,9 @@ export default function CommentLayout() {
                     </div>) : null}
 
                     {type === 'image' ? (<div className="image-container">
-                        <a></a>
+                        <div className="issue-text">
+                            {parse(issueString)}
+                        </div>
                         <div>
                             <img src={issue.imgUrl} alt="issue-image" />
                         </div>
@@ -309,15 +322,6 @@ export default function CommentLayout() {
                             <span className="link-url">{link}</span>
                         </div>
                     </div>) : null} 
-
-
-
-
-                    {type === 'poll' ? (<div>
-
-                    </div>) : null}
-
-
 
 
                     <div className="comment-box">
@@ -345,24 +349,14 @@ export default function CommentLayout() {
                     {renderedComments}
                 </div>
                 <div className="second-column">
-                    <div>
-                        <p>Today's top issues</p>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                        <div className="button-container">
-                            <button>View All</button>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Rules Posting to Rock The Vote</p>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
+                    
+                    <div className="rules-for-posting-container">
+                        <p className="rules-for-posting">Rules Posting to Rock The Vote</p>
+                            <ol>
+                            <li>No Profanity</li>
+                                <li>Be nice</li>
+                                <li>Speak your mind</li>
+                            </ol>
                     </div>
                 </div>
             </div>

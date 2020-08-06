@@ -91,11 +91,11 @@ const StyledIssue = styled.div`
     }
 
     .issue-text {
-        padding: 0 10px;
+        padding: 0 0;
     }
 
     .issue-text h1 {
-        margin: 10px;
+        margin: 10px 0;
     }
 
     .image-from-url {

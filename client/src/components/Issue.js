@@ -19,8 +19,9 @@ const StyledIssue = styled.div`
         opacity: 1;
         position: relative;
         padding-bottom: 30px;
-        border-radius: 5px;
+        border-radius: 0 5px 5px 0;
         padding: 20px;
+        position: relative;
     }
 
     .content span.vote-count {
@@ -93,6 +94,10 @@ const StyledIssue = styled.div`
         padding: 0 10px;
     }
 
+    .issue-text h1 {
+        margin: 10px;
+    }
+
     .image-from-url {
         width: 100%;
         height: auto;
@@ -105,13 +110,19 @@ const StyledIssue = styled.div`
     .link-url-container {
         margin-bottom: 10px;
     }
+
+    .posted-by {
+        position: absolute; 
+        top: 10px;
+        left: 10px;
+    }
 `
 
 
 export default function Issue(props) {
     const history = useHistory()
     
-    const { issue, description, _id, commentCount, voteCount, imgUrl, link, type } = props
+    const { issue, description, _id, commentCount, voteCount, imgUrl, link, type, user } = props
 
     let [voteCountState, setVoteCountState] = useState(voteCount)
 
@@ -144,7 +155,10 @@ export default function Issue(props) {
                     }
                 }} />
             </div>
-            {type === 'post' ? (<div className="content">ddd
+            {type === 'post' ? (<div className="content">
+
+                <span className="posted-by">Posted by {user.username}</span>
+
                 <div className="issue-text">
                     {parse(issue)}
                 </div>
@@ -169,6 +183,10 @@ export default function Issue(props) {
 
 
             {type === 'image' ? (<div className="content">
+
+                <span className="posted-by">Posted by {user.username}</span>
+
+
                 <div className="issue-text">
                     {parse(issue)}
                 </div>
@@ -188,6 +206,9 @@ export default function Issue(props) {
 
 
             {type === 'link' ? (<div className="content">
+
+                <span className="posted-by">Posted by {user.username}</span>
+
                 <div className="issue-text">
                     {parse(issue)}
                 </div>

@@ -12,7 +12,7 @@ const issueSchema = new Schema({
         required: false
     },
     user: {
-        type: String, 
+        type: Object, 
         required: true
     }, 
     link: {

@@ -292,8 +292,12 @@ export default function IssueForm(props) {
             return 
         }
 
+        const userFromStorage = JSON.parse(localStorage.getItem('user'))
 
-
+        const user = {
+            id: userFromStorage._id, 
+            userName: userFromStorage.username
+        }
 
 
         // if (type === 'link' && errors.link === false) return 
@@ -302,7 +306,8 @@ export default function IssueForm(props) {
         addIssue({
             ...inputs, 
             type: type,
-            issue: h1
+            issue: h1, 
+            user
         })
         setInputs(initInputs)
     }

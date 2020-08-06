@@ -122,6 +122,7 @@ export default function Public() {
 
     const {
         issues, 
+        getUserIssues
     } = useContext(UserContext)
 
     const history = useHistory()
@@ -134,6 +135,10 @@ export default function Public() {
     const sortedIssues = issues.sort((a, b) => {
         return b.voteCount - a.voteCount
     })
+
+    useEffect(() => {
+        getUserIssues()
+    }, [])
 
     return (
         <IssuesLayout>

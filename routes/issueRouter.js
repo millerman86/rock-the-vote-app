@@ -21,7 +21,6 @@ issueRouter.get('/', (req, res, next) => {
                     if (err) {
                         reject(err)
                     }
-                    console.log('here is comment count', commentCount);
                     resolve(commentCount)
                    
                 }).countDocuments()
@@ -45,7 +44,11 @@ issueRouter.get('/', (req, res, next) => {
 
 // We want to be able to get all the issues that belong to the user using the application
 issueRouter.get('/user', (req, res, next) => {
-    Issue.find({user: req.user._id}, (err, issues) => {
+
+    // Find the URL for the solution here: https://docs.mongodb.com/manual/tutorial/query-embedded-documents/
+    // Nested field
+    Issue.find({'user.id': req.user._id}, (err, issues) => {
+
         if (err) {
             res.status(500)
             return next(err)
@@ -70,7 +73,6 @@ issueRouter.get('/user', (req, res, next) => {
                 issues.forEach((issue, i) => {
                     issue['commentCount'] = values[i]
                 })
-
                 return res.status(201).send(issues)
             })
             .catch(() => {
@@ -80,8 +82,15 @@ issueRouter.get('/user', (req, res, next) => {
 })
 
 issueRouter.post('/', (req, res, next) => {
-    req.body.user = req.user._id
-    const newIssue = new Issue(req.body)
+    req.body.user = req.user
+
+    const newIssue = new Issue({
+        ...req.body, 
+        user: {
+            username: req.user.username, 
+            id: req.user._id
+        }
+    })
     newIssue.save((err, savedIssue) => {
         if (err) {
             res.status(500)

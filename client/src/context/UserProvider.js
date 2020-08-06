@@ -80,6 +80,7 @@ export default function UserProvider(props) {
     if (!localStorage.getItem('token')) return
     userAxios.get('/api/issue/user')
       .then(res => {
+        console.log('res', res.data);
         setUserState(prevState => ({
           ...prevState, 
           issues: [...res.data]

@@ -312,8 +312,6 @@ export default function CommentLayout() {
                         </div>
                     </div>) : null}
 
-
-
                     {type === 'link' ? (<div className="content">
                         <div className="issue-text">
                             {parse(issueString)}
@@ -342,10 +340,6 @@ export default function CommentLayout() {
                             <button onClick={makeComment}>Comment</button>
                         </div>
                     </div>
-
-
-
-
                     {renderedComments}
                 </div>
                 <div className="second-column">

@@ -46,6 +46,10 @@ const AuthContainer = styled.div`
     text-align: center;
     padding: 20px 0;
   }
+
+  .test-drive {
+    text-align: center;
+  }
 `
 
 
@@ -77,6 +81,7 @@ export default () => {
   return (
     <AuthContainer>
       <div className="form-container">
+        <h3 className="test-drive">Take a test drive! Username: guest, Password: guest</h3>
         <h1>{!toggle ? "Sign up" : "Log in"}</h1>
         {!toggle ? 
           <>

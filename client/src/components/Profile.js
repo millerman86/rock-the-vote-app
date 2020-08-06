@@ -122,10 +122,7 @@ export default function Public() {
 
     const {
         issues, 
-        getUserIssues
     } = useContext(UserContext)
-
-    console.log(issues, 'issues');
 
     const history = useHistory()
 
@@ -133,13 +130,10 @@ export default function Public() {
         history.push(`/submit/${extension}`)
     }
 
+
     const sortedIssues = issues.sort((a, b) => {
         return b.voteCount - a.voteCount
     })
-
-    useEffect(() => {
-        getUserIssues()
-    }, [])
 
     return (
         <IssuesLayout>

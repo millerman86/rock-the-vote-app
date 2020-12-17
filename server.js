@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 
-
+console.log('test');
 
 app.use(express.static(path.join(__dirname, "client", "build")))
 // ...

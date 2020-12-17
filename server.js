@@ -1,20 +1,16 @@
 const express = require('express')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
-/* Error handling for jwt
-The default behavior is to throw an error when the token is
-invalid, so you can add your custom logic to manage unauthorized access as follows: */
 const expressjwt = require('express-jwt')
 const cors = require('cors')
-require("dotenv").config()
+const path = require("path")
 
 const secret = process.env.SECRET || "unicorntomatofastcloudy"
 
-const path = require("path")
 const connectDB = require('./config/db')
 
 
 const app = express() 
+require("dotenv").config()
 connectDB()
 
 
@@ -48,7 +44,7 @@ app.get("*", (req, res) => {
 });
 
 
-app.listen(port || 9000, () => {
+app.listen(process.env.PORT || 9000, () => {
     console.log('Server is running on local port 9000')
 })
 

@@ -9,11 +9,14 @@ const expressjwt = require('express-jwt')
 const cors = require('cors')
 const port = process.env.PORT || 5000;
 require("dotenv").config()
-const mongouri = process.env.MONGODB_URI || 'mongodb://localhost:27017/rock-the-vote-app'
 
 const secret = process.env.SECRET || "unicorntomatofastcloudy"
 
 const path = require("path")
+const connectDB = require('./config/db')
+
+connectDB()
+
 
 // ... other app.use middleware 
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -22,16 +25,6 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
-mongoose.connect(
-    mongouri, // all collections will go into one database entry
-    {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true, 
-        useCreateIndex: true,
-        useFindAndModify: false
-    }, 
-    () => console.log('Connected to the DB')
-)
 
 app.use('/auth', require('./routes/authRouter')) // for signup and login
 app.use('/api', expressjwt({secret: secret})) // Remember: The token is in the header

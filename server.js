@@ -1,28 +1,40 @@
 const express = require('express')
+const app = express() 
 const morgan = require('morgan')
+const mongoose = require('mongoose')
+/* Error handling for jwt
+The default behavior is to throw an error when the token is
+invalid, so you can add your custom logic to manage unauthorized access as follows: */
 const expressjwt = require('express-jwt')
 const cors = require('cors')
-const path = require("path")
+const port = process.env.PORT || 5000;
+require("dotenv").config()
+const mongouri = process.env.MONGODB_URI || 'mongodb://localhost:27017/rock-the-vote-app'
 
 const secret = process.env.SECRET || "unicorntomatofastcloudy"
 
-const connectDB = require('./config/db')
-
-
-const app = express() 
-require("dotenv").config()
-connectDB()
-
+const path = require("path")
 
 // ... other app.use middleware 
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
+mongoose.connect(
+    mongouri, // all collections will go into one database entry
+    {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true, 
+        useCreateIndex: true,
+        useFindAndModify: false
+    }, 
+    () => console.log('Connected to the DB')
+)
 
 app.use('/auth', require('./routes/authRouter')) // for signup and login
-app.use('/api', expressjwt({secret: secret, algorithms: ['RS256']})) // Remember: The token is in the header
+app.use('/api', expressjwt({secret: secret})) // Remember: The token is in the header
 app.use('/api/issue', require('./routes/issueRouter'))
 app.use('/api/comment', require('./routes/commentRouter'))
 
@@ -34,9 +46,8 @@ app.use((err, req, res, next) => {
     return res.send({errMsg: err.message})
 })
 
-console.log('test');
 
-app.use(express.static(path.join(__dirname, "client", "build")))
+
 // ...
 // Right before your app.listen(), add this:
 app.get("*", (req, res) => {
@@ -44,7 +55,7 @@ app.get("*", (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 9000, () => {
+app.listen(port, () => {
     console.log('Server is running on local port 9000')
 })
 
